@@ -28,7 +28,7 @@ const Search = () => {
 };
 
 const FormComponent = styled.form`
-  margin: 5rem 25% 0 25%;
+  margin: 0rem 25%;
   div {
     position: relative;
     width: 100%;
