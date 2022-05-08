@@ -1,12 +1,14 @@
-import React, { Fragment, useEffect,useState} from "react";
-import {useParams} from "react-router-dom"
-import styled from "styled-components"
+import React, {  useEffect, useState } from "react";
+import { useParams,Link } from "react-router-dom";
+import styled from "styled-components";
 
 const SearchedRecipes = () => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const params = useParams();
   const getSearchedRecipes = async (name) => {
-    const localSearchedRecipesData = localStorage.getItem(`searchedRecipesData${name}`);
+    const localSearchedRecipesData = localStorage.getItem(
+      `searchedRecipesData${name}`
+    );
     if (localSearchedRecipesData) {
       setSearchedRecipes(JSON.parse(localSearchedRecipesData));
     } else {
@@ -27,15 +29,17 @@ const SearchedRecipes = () => {
   }, [params.searchKey]);
   return (
     <Grid>
-    {searchedRecipes.map((item) => {
-      return (
-        <Card key={item.id}>
-          <img src={item.image} alt={item.title} />
-          <h4>{item.title}</h4>
-        </Card>
-      );
-    })}
-  </Grid>
+      {searchedRecipes.map((item) => {
+        return (
+          <Card key={item.id}>
+            <Link to={`/recipe/${item.id}`}>
+              <img src={item.image} alt={item.title} />
+              <h4>{item.title}</h4>
+            </Link>
+          </Card>
+        );
+      })}
+    </Grid>
   );
 };
 

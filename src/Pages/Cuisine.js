@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 
 const Cuisine = () => {
@@ -15,7 +14,10 @@ const Cuisine = () => {
         `https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&cuisine=${name}`
       );
       const cuisineData = await data.json();
-      localStorage.setItem(`cuisineData${name}`, JSON.stringify(cuisineData.results));
+      localStorage.setItem(
+        `cuisineData${name}`,
+        JSON.stringify(cuisineData.results)
+      );
       setCuisine(cuisineData.results);
     }
   };
@@ -29,8 +31,10 @@ const Cuisine = () => {
       {cuisine.map((item) => {
         return (
           <Card key={item.id}>
-            <img src={item.image} alt={item.title} />
-            <h4>{item.title}</h4>
+            <Link to={`/recipe/${item.id}`}>
+              <img src={item.image} alt={item.title} />
+              <h4>{item.title}</h4>
+            </Link>
           </Card>
         );
       })}
